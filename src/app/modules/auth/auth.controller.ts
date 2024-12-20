@@ -3,6 +3,7 @@ import { AuthService } from './auth.service';
 import { catchAsync } from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 
+// controller to register user
 const registerUserController = catchAsync(
   async (req: Request, res: Response) => {
     const { name, email, password } = req.body;
@@ -18,6 +19,7 @@ const registerUserController = catchAsync(
   },
 );
 
+// controller to register user
 const loginUserController = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 

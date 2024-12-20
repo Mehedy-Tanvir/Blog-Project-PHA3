@@ -32,6 +32,14 @@ const userSchema = new Schema<TUser, UserModel>(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform: function (doc, ret) {
+        // To Remove __v and isBlocked from the response
+        delete ret.__v;
+        // delete ret.isBlocked;
+        return ret;
+      },
+    },
   },
 );
 

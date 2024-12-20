@@ -24,6 +24,14 @@ const BlogSchema: Schema = new Schema<TBlog>(
   },
   {
     timestamps: true,
+    toJSON: {
+      transform: function (doc, ret) {
+        // To Remove __v and isDeleted from the response
+        delete ret.__v;
+        // delete ret.isPublished;
+        return ret;
+      },
+    },
   },
 );
 

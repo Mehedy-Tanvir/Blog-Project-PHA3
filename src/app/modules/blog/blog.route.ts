@@ -23,12 +23,13 @@ router.patch(
   BlogController.updateBlogController,
 );
 
-// // Route to delete a blog
-// router.delete(
-//   '/delete/:blogId',
-//   validateRequest(BlogValidation.deleteBlogValidationSchema),
-//   BlogController.deleteBlogController,
-// );
+// Route to delete a blog
+router.delete(
+  '/:blogId',
+  auth(USER_ROLE.user),
+  validateRequest(BlogValidation.deleteBlogValidationSchema),
+  BlogController.deleteBlogController,
+);
 
 // // Route to get all blogs
 // router.get(

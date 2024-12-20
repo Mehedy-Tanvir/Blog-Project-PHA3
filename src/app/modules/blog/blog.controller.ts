@@ -37,19 +37,19 @@ const updateBlogController = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-// // Controller to delete a blog
-// const deleteBlogController = catchAsync(async (req: Request, res: Response) => {
-//   const userId = req.user.id; // Assuming user ID is available in req.user (via middleware)
-//   const { blogId } = req.params;
+// Controller to delete a blog
+const deleteBlogController = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.userId;
+  const { blogId } = req.params;
 
-//   await BlogService.deleteBlog(blogId, userId);
+  await BlogService.deleteBlog(blogId, userId);
 
-//   sendResponse(res, {
-//     statusCode: 200,
-//     success: true,
-//     message: 'Blog deleted successfully',
-//   });
-// });
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: 'Blog deleted successfully',
+  });
+});
 
 // // Controller to get all blogs (with optional filters, search, etc.)
 // const getAllBlogsController = catchAsync(
@@ -70,6 +70,6 @@ const updateBlogController = catchAsync(async (req: Request, res: Response) => {
 export const BlogController = {
   createBlogController,
   updateBlogController,
-  //   deleteBlogController,
+  deleteBlogController,
   //   getAllBlogsController,
 };

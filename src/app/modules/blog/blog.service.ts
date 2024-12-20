@@ -46,7 +46,6 @@ const updateBlog = async (
   // Populate the author field
   await blog.populate('author');
 
-  // Return data in a similar format to createBlog
   return {
     _id: blog._id,
     title: blog.title,
@@ -55,7 +54,7 @@ const updateBlog = async (
   };
 };
 
-const deleteBlog = async (blogId: string, userId: string) => {
+const deleteBlog = async (blogId: string, userId: Types.ObjectId) => {
   const blog = await Blog.findOneAndDelete({ _id: blogId, author: userId });
   if (!blog) {
     throw new AppError(404, 'Blog not found or not owned by the user');

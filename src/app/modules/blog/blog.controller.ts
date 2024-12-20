@@ -51,25 +51,25 @@ const deleteBlogController = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-// // Controller to get all blogs (with optional filters, search, etc.)
-// const getAllBlogsController = catchAsync(
-//   async (req: Request, res: Response) => {
-//     const query = req.query; // Extracting query parameters for search, sorting, etc.
+// Controller to get all blogs with optional filters, search, etc.
+const getAllBlogsController = catchAsync(
+  async (req: Request, res: Response) => {
+    const query = req.query;
 
-//     const blogs = await BlogService.getAllBlogs(query);
+    const blogs = await BlogService.getAllBlogs(query);
 
-//     sendResponse(res, {
-//       statusCode: 200,
-//       success: true,
-//       message: 'Blogs fetched successfully',
-//       data: blogs,
-//     });
-//   },
-// );
+    sendResponse(res, {
+      statusCode: 200,
+      success: true,
+      message: 'Blogs fetched successfully',
+      data: blogs,
+    });
+  },
+);
 
 export const BlogController = {
   createBlogController,
   updateBlogController,
   deleteBlogController,
-  //   getAllBlogsController,
+  getAllBlogsController,
 };

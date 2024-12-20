@@ -24,12 +24,14 @@ const deleteBlogValidationSchema = z.object({
 });
 
 const getAllBlogsValidationSchema = z.object({
-  query: z.object({
-    search: z.string().optional(),
-    sortBy: z.string().optional().default('createdAt'),
-    sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
-    filter: z.string().optional(),
-  }),
+  query: z
+    .object({
+      search: z.string().optional(),
+      sortBy: z.string().optional().default('createdAt'),
+      sortOrder: z.enum(['asc', 'desc']).optional().default('desc'),
+      filter: z.string().optional(),
+    })
+    .optional(),
 });
 
 export const BlogValidation = {

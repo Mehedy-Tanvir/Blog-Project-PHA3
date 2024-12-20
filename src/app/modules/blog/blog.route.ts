@@ -31,11 +31,11 @@ router.delete(
   BlogController.deleteBlogController,
 );
 
-// // Route to get all blogs
-// router.get(
-//   '/all',
-//   validateRequest(BlogValidation.getAllBlogsValidationSchema),
-//   BlogController.getAllBlogsController,
-// );
+// Route to get all blogs
+router.get(
+  '/',
+  validateRequest(BlogValidation.getAllBlogsValidationSchema),
+  BlogController.getAllBlogsController,
+);
 
 export const BlogRoutes = router;

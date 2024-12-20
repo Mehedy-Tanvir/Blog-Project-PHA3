@@ -29,7 +29,7 @@ const createBlog = async (
 
 const updateBlog = async (
   blogId: string,
-  userId: string,
+  userId: Types.ObjectId,
   updateData: Partial<Pick<TBlog, 'title' | 'content'>>,
 ) => {
   const blog = await Blog.findOne({ _id: blogId, author: userId });
@@ -37,10 +37,22 @@ const updateBlog = async (
     throw new AppError(404, 'Blog not found or not owned by the user');
   }
 
+  // Update blog fields
   Object.assign(blog, updateData);
+
+  // Save updated blog
   await blog.save();
 
-  return blog;
+  // Populate the author field
+  await blog.populate('author');
+
+  // Return data in a similar format to createBlog
+  return {
+    _id: blog._id,
+    title: blog.title,
+    content: blog.content,
+    author: blog.author,
+  };
 };
 
 const deleteBlog = async (blogId: string, userId: string) => {

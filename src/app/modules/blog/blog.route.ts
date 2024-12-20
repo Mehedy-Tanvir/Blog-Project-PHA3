@@ -16,11 +16,12 @@ router.post(
 );
 
 // // Route to update a blog
-// router.put(
-//   '/update/:blogId',
-//   validateRequest(BlogValidation.updateBlogValidationSchema),
-//   BlogController.updateBlogController,
-// );
+router.patch(
+  '/:blogId',
+  auth(USER_ROLE.user),
+  validateRequest(BlogValidation.updateBlogValidationSchema),
+  BlogController.updateBlogController,
+);
 
 // // Route to delete a blog
 // router.delete(

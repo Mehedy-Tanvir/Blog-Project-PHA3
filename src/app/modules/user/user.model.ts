@@ -1,10 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
-import { TUser } from './user.interface';
+import { TUser, UserModel } from './user.interface';
 import bcrypt from 'bcrypt';
 import config from '../../config';
 
 // User Schema
-const UserSchema: Schema = new Schema<TUser>(
+const userSchema = new Schema<TUser, UserModel>(
   {
     name: {
       type: String,
@@ -35,7 +35,7 @@ const UserSchema: Schema = new Schema<TUser>(
   },
 );
 
-UserSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const user = this; // doc
   // hashing password and save into DB
@@ -49,16 +49,16 @@ UserSchema.pre('save', async function (next) {
 });
 
 // set '' after saving password
-UserSchema.post('save', function (doc, next) {
+userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });
 
-UserSchema.statics.isUserExistsByCustomId = async function (id: string) {
-  return await User.findOne({ id }).select('+password');
+userSchema.statics.isUserExistsByEmail = async function (email: string) {
+  return await User.findOne({ email: email }).select('+password');
 };
 
-UserSchema.statics.isPasswordMatched = async function (
+userSchema.statics.isPasswordMatched = async function (
   plainTextPassword,
   hashedPassword,
 ) {
@@ -66,5 +66,5 @@ UserSchema.statics.isPasswordMatched = async function (
 };
 
 // Create and export the model
-const User = mongoose.model<TUser>('User', UserSchema);
+const User = mongoose.model<TUser, UserModel>('User', userSchema);
 export default User;

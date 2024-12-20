@@ -11,6 +11,12 @@ router.post(
   AuthController.registerUserController,
 );
 
+router.post(
+  '/login',
+  validateRequest(AuthValidation.loginValidationSchema),
+  AuthController.loginUserController,
+);
+
 //   '/login',
 //   validateRequest(AuthValidation.loginValidationSchema),
 //   AuthControllers.loginUser,

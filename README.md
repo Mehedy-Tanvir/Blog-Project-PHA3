@@ -1,4 +1,3 @@
-
 # Blog Project
 
 ## Overview
@@ -12,7 +11,7 @@ The backend includes secure authentication, role-based access control, and a pub
 
 ## Live URL
 
-[Deployment Link](#)&#x20;
+[Deployment Link](https://blog-project-pha-3.vercel.app/);
 
 ## Features
 
@@ -81,7 +80,7 @@ The backend includes secure authentication, role-based access control, and a pub
 
 ### Authentication
 
-1. **Register User**   **POST** `/api/auth/register`
+1. **Register User** **POST** `/api/auth/register`
 
    ```json
    {
@@ -91,7 +90,7 @@ The backend includes secure authentication, role-based access control, and a pub
    }
    ```
 
-2. **Login User**   **POST** `/api/auth/login`
+2. **Login User** **POST** `/api/auth/login`
 
    ```json
    {
@@ -102,7 +101,7 @@ The backend includes secure authentication, role-based access control, and a pub
 
 ### Blog Management
 
-1. **Create Blog**   **POST** `/api/blogs`
+1. **Create Blog** **POST** `/api/blogs`
 
    ```json
    {
@@ -111,7 +110,7 @@ The backend includes secure authentication, role-based access control, and a pub
    }
    ```
 
-2. **Update Blog**   **PATCH** `/api/blogs/:id`
+2. **Update Blog** **PATCH** `/api/blogs/:id`
 
    ```json
    {
@@ -120,15 +119,15 @@ The backend includes secure authentication, role-based access control, and a pub
    }
    ```
 
-3. **Delete Blog**   **DELETE** `/api/blogs/:id`
+3. **Delete Blog** **DELETE** `/api/blogs/:id`
 
-4. **Get All Blogs**   **GET** `/api/blogs?search=query&sortBy=createdAt&sortOrder=desc&filter=authorId`
+4. **Get All Blogs** **GET** `/api/blogs?search=query&sortBy=createdAt&sortOrder=desc&filter=authorId`
 
 ### Admin Actions
 
-1. **Block User**   **PATCH** `/api/admin/users/:userId/block`
+1. **Block User** **PATCH** `/api/admin/users/:userId/block`
 
-2. **Delete Blog**   **DELETE** `/api/admin/blogs/:id`
+2. **Delete Blog** **DELETE** `/api/admin/blogs/:id`
 
 ## Models
 

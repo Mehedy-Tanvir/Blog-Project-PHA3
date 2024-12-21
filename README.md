@@ -1,236 +1,188 @@
-# 🚴 Bike Store API
 
-It is an application to manage bike store. This application manages bike stock, take orders and calculate profits.This application is developed in **TypeScript**, **Express.js**, and **MongoDB**, and it has rich endpoints that can be used effectively for managing a bike store.
+# Blog Project
 
----
+## Overview
 
-## 🌟 Features
+The goal of this project is to develop a backend for a blogging platform where users can write, update, and delete their blogs. The system includes two roles: **Admin** and **User**.
 
-### 📦 **Product Management**
+- **Admin**: Has special permissions to manage users and their blogs.
+- **User**: Can perform CRUD operations on their own blogs.
 
-- **Add New Product**: It can create a bike with details like name, brand, price, category, and stock status.
-- **Get All Bikes**: It can retrieve a list of all available bikes with support for filters (e.g., name, brand, category).
-- **Get Specific Bike**: It can fetch detailed information about a specific bike using its unique ID.
-- **Update Bike**: it can modify bike details such as price and stock quantity.
-- **Delete Bike**: It can soft delete a bike, ensuring it is no longer available for transactions.
-- **Error Handling**: It can return appropriate messages if invalid values are tried to add.
+The backend includes secure authentication, role-based access control, and a public API for viewing blogs with search, sort, and filter functionalities.
 
-### 🛒 **Order Management**
+## Live URL
 
-- **Place Orders**: It can reduce inventory when a bike is ordered, ensuring inventory accuracy.
-- **Handle Stock**: It can automatically update stock status (`inStock`) when quantities reach zero.
-- **Error Handling**: It can return appropriate messages for insufficient stock during order placement.
+[Deployment Link](#)&#x20;
 
-### 📊 **Revenue Calculation**
+## Features
 
-- **Calculate Revenue**: It uses MongoDB's aggregation pipeline to compute total revenue from all orders.
+- **User Roles:**
+  - Admin: Manage users and delete any blog.
+  - User: Perform CRUD operations on their blogs.
+- **Authentication & Authorization:**
+  - Secure login system with JWT.
+  - Role-based access control.
+- **Blog Management:**
+  - Create, update, and delete blogs.
+  - View blogs with search, sort, and filter functionalities.
+- **Admin Actions:**
+  - Block users.
+  - Delete any blog.
 
-### 📊 **Debuggers**
+## Technologies Used
 
-- **ESlint**: It finds and fixes errors in run time.
-- **Prettier**: It finds and formates code in run time.
+- **Backend:** TypeScript, Node.js, Express.js
+- **Database:** MongoDB with Mongoose
+- **Authentication:** JWT
 
----
+## Installation and Setup
 
-## 🛠️ **Getting Started**
+### Prerequisites
 
-### ⚡ Prerequisites
+- Node.js installed (version 16 or higher).
+- MongoDB installed and running locally or in the cloud.
+- A package manager like npm or yarn.
 
-- **Node.js** (v18+ recommended)
-- **MongoDB** (Local or Cloud instance)
-- **Git**
-- **npm** or **yarn**
+### Steps
 
----
-
-### 🚀 **Setup Instructions**
-
-1. **Clone the Repository**
+1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Mehedy-Tanvir/Bike-Store-PHA2.git
-   cd Bike-Store-PHA2
+   git clone https://github.com/Mehedy-Tanvir/Blog-Project-PHA3.git
+   cd Blog-Project-PHA3
    ```
 
-2. **Install Dependencies**
+2. Install dependencies:
 
    ```bash
    npm install
-   # or
-   yarn install
    ```
 
-3. **Setup Environment Variables**
-   Create a `.env` file in the root directory and add the following:
+3. Create a `.env` file in the root directory and configure the following:
 
    ```env
    NODE_ENV=development
    PORT=5000
-   DATABASE_URL=mongodb+srv://<username>:<password>@cluster0.mongodb.net/bike-store
+   DATABASE_URL=your_mongodb_database_url
+   BCRYPT_SALT_ROUNDS=bcrypt_salt_rounds
+   JWT_ACCESS_SECRET=jwt_access_secret
+   JWT_ACCESS_EXPIRES_IN=expire_duration
    ```
 
-4. **Run the Project**
+4. Start the server:
 
-   - **Development Mode**
-     ```bash
-     npm run start:dev
-     # or
-     yarn start:dev
-     ```
-   - **Production Mode**
-     ```bash
-     npm run build
-     npm run start:prod
-     # or
-     yarn build && yarn start:prod
-     ```
+   ```bash
+   npm run start:dev
+   ```
 
-5. **Run Linter and Formatter**
-   - To check for linting issues:
-     ```bash
-     npm run lint
-     # or
-     yarn lint
-     ```
-   - To fix linting and formatting:
-     ```bash
-     npm run lint:fix
-     npm run prettier
-     # or
-     yarn lint:fix && yarn prettier
-     ```
+5. Access the application at `http://localhost:5000`.
 
----
+## API Endpoints
 
-## 🧪 **API Endpoints**
+### Authentication
 
-### 1. **Add New Bike**
+1. **Register User**   **POST** `/api/auth/register`
 
-- **Endpoint**: `POST /api/products`
-- **Request Body**:
-  ```json
-  {
-    "name": "Xtreme Mountain Bike",
-    "brand": "Giant",
-    "price": 1200,
-    "category": "Mountain",
-    "description": "A high-performance bike built for tough terrains.",
-    "quantity": 50
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "message": "Product added successfully",
-    "status": true,
-    "data": { ... }
-  }
-  ```
+   ```json
+   {
+     "name": "John Doe",
+     "email": "john@example.com",
+     "password": "securepassword"
+   }
+   ```
 
-### 2. **Get All Bikes**
+2. **Login User**   **POST** `/api/auth/login`
 
-- **Endpoint**: `GET /api/products`
-- **Query Parameters**:
-  - `searchTerm` (optional): Search by `name`, `brand`, or `category`.
-- **Response**:
-  ```json
-  {
-    "message": "Bikes retrieved successfully",
-    "status": true,
-    "data": [ ... ]
-  }
-  ```
+   ```json
+   {
+     "email": "john@example.com",
+     "password": "securepassword"
+   }
+   ```
 
-### 3. **Get Specific Bike**
+### Blog Management
 
-- **Endpoint**: `GET /api/products/:productId`
-- **Response**:
-  ```json
-  {
-    "message": "Bike retrieved successfully",
-    "status": true,
-    "data": { ... }
-  }
-  ```
+1. **Create Blog**   **POST** `/api/blogs`
 
-### 4. **Update a Bike**
+   ```json
+   {
+     "title": "My First Blog",
+     "content": "This is the content of my blog."
+   }
+   ```
 
-- **Endpoint**: `PUT /api/products/:productId`
-- **Request Body** (example):
-  ```json
-  {
-    "price": 1300,
-    "quantity": 30
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "message": "Bike updated successfully",
-    "status": true,
-    "data": { ... }
-  }
-  ```
+2. **Update Blog**   **PATCH** `/api/blogs/:id`
 
-### 5. **Delete a Bike**
+   ```json
+   {
+     "title": "Updated Blog Title",
+     "content": "Updated content."
+   }
+   ```
 
-- **Endpoint**: `DELETE /api/products/:productId`
-- **Response**:
-  ```json
-  {
-    "message": "Bike deleted successfully",
-    "status": true
-  }
-  ```
+3. **Delete Blog**   **DELETE** `/api/blogs/:id`
 
-### 6. **Place an Order**
+4. **Get All Blogs**   **GET** `/api/blogs?search=query&sortBy=createdAt&sortOrder=desc&filter=authorId`
 
-- **Endpoint**: `POST /api/orders`
-- **Request Body**:
-  ```json
-  {
-    "email": "customer@example.com",
-    "product": "648a45e5f0123c45678d9012",
-    "quantity": 2,
-    "totalPrice": 2400
-  }
-  ```
-- **Response**:
-  ```json
-  {
-    "message": "Order created successfully",
-    "status": true,
-    "data": { ... }
-  }
-  ```
+### Admin Actions
 
-### 7. **Calculate Revenue**
+1. **Block User**   **PATCH** `/api/admin/users/:userId/block`
 
-- **Endpoint**: `GET /api/orders/revenue`
-- **Response**:
-  ```json
-  {
-    "message": "Revenue calculated successfully",
-    "status": true,
-    "data": {
-      "totalRevenue": 3600
-    }
-  }
-  ```
+2. **Delete Blog**   **DELETE** `/api/admin/blogs/:id`
 
----
+## Models
 
-## 📚 **Technologies Used**
+### User Model
 
-- **Node.js** & **Express.js**
-- **MongoDB** & **Mongoose**
-- **TypeScript**
-- **Zod** for request validation
-- **ESLint** & **Prettier** for code quality
-- **ts-node-dev** for seamless development
+```json
+{
+  "name": "string",
+  "email": "string",
+  "password": "string",
+  "role": "admin | user",
+  "isBlocked": "boolean",
+  "createdAt": "Date",
+  "updatedAt": "Date"
+}
+```
 
----
+### Blog Model
 
-## 📧 **Contact**
+```json
+{
+  "title": "string",
+  "content": "string",
+  "author": "ObjectId",
+  "isPublished": "boolean",
+  "createdAt": "Date",
+  "updatedAt": "Date"
+}
+```
 
-For questions or support, please reach out via [Md. Mehedy Hasan Tanvir](https://github.com/Mehedy-Tanvir).
+## Error Handling:
+
+- **Zod Validation Error**: Invalid data inputs based on schema validation.
+- **Not Found Error**: Resource not found.
+- **Validation Error**: Incorrect data format or missing fields.
+- **Authentication Error**: Invalid token or expired session.
+- **Authorization Error**: Unauthorized access.
+
+### Common Error Response Format
+
+```json
+{
+  "success": false,
+  "message": "Error message",
+  "statusCode": 400,
+  "error": { "details": "Additional error details" },
+  "stack": "error stack trace"
+}
+```
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+## Contact
+
+For questions or support, please contact [mehedytanvir451\@gmail.com].

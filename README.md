@@ -11,7 +11,7 @@ The backend includes secure authentication, role-based access control, and a pub
 
 ## Live URL
 
-[Deployment Link](https://blog-project-pha-3.vercel.app/);
+[Deployment Link](https://blog-project-pha-3.vercel.app/)
 
 ## Features
 

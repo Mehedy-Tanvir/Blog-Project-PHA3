@@ -19,7 +19,7 @@ const registerUserController = catchAsync(
   },
 );
 
-// controller to register user
+// controller to login user
 const loginUserController = catchAsync(async (req: Request, res: Response) => {
   const { email, password } = req.body;
 

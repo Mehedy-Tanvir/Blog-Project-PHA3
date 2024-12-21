@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
-import config from '../config';
 import handleZodError from '../errors/handleZodError';
 import { TErrorSources } from '../interface/error';
 import handleValidationError from '../errors/handleValidationError';

@@ -35,6 +35,5 @@ const BlogSchema: Schema = new Schema<TBlog>(
   },
 );
 
-// Create and export the model
 const Blog = mongoose.model<TBlog>('Blog', BlogSchema);
 export default Blog;

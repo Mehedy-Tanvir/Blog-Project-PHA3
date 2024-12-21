@@ -2,6 +2,7 @@ import User from '../user/user.model';
 import Blog from '../blog/blog.model';
 import AppError from '../../errors/AppError';
 
+// blocking user service
 export const blockUser = async (userId: string) => {
   const user = await User.findOneAndUpdate(
     { _id: userId },
@@ -16,6 +17,7 @@ export const blockUser = async (userId: string) => {
   return { message: 'User blocked successfully' };
 };
 
+// deleting blog service
 export const deleteBlog = async (blogId: string) => {
   const blog = await Blog.findById(blogId);
   if (!blog) {

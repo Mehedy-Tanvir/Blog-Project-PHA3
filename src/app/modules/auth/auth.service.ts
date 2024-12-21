@@ -5,6 +5,7 @@ import User from '../user/user.model';
 import { TLoginUser } from './auth.interface';
 import { createToken } from './auth.utils';
 
+// service for registering user
 const registerUser = async (
   userData: Pick<TUser, 'name' | 'email' | 'password'>,
 ) => {
@@ -32,6 +33,7 @@ const registerUser = async (
   };
 };
 
+// service for login user
 const loginUser = async (payload: TLoginUser) => {
   // checking if the user is exist
   const user = await User.isUserExistsByEmail(payload.email);

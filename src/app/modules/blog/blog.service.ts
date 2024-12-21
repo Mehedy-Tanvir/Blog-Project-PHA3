@@ -4,6 +4,7 @@ import AppError from '../../errors/AppError';
 import { TBlog } from './blog.interface';
 import Blog from './blog.model';
 
+// service for creating blog
 const createBlog = async (
   userId: Types.ObjectId,
   blogData: Pick<TBlog, 'title' | 'content'>,
@@ -27,6 +28,7 @@ const createBlog = async (
   };
 };
 
+// service for updating the blog
 const updateBlog = async (
   blogId: string,
   userId: Types.ObjectId,
@@ -54,6 +56,7 @@ const updateBlog = async (
   };
 };
 
+// service for deleting blog
 const deleteBlog = async (blogId: string, userId: Types.ObjectId) => {
   const blog = await Blog.findOneAndDelete({ _id: blogId, author: userId });
   if (!blog) {
@@ -63,6 +66,7 @@ const deleteBlog = async (blogId: string, userId: Types.ObjectId) => {
   return blog;
 };
 
+// service for blog query
 const getAllBlogs = async (query: {
   search?: string;
   sortBy?: string;

@@ -61,11 +61,11 @@ userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });
-
+// finding user with the email already exists or not
 userSchema.statics.isUserExistsByEmail = async function (email: string) {
   return await User.findOne({ email: email }).select('+password');
 };
-
+// matching password
 userSchema.statics.isPasswordMatched = async function (
   plainTextPassword,
   hashedPassword,
@@ -73,6 +73,5 @@ userSchema.statics.isPasswordMatched = async function (
   return await bcrypt.compare(plainTextPassword, hashedPassword);
 };
 
-// Create and export the model
 const User = mongoose.model<TUser, UserModel>('User', userSchema);
 export default User;

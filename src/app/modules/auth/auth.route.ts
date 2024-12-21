@@ -5,12 +5,14 @@ import { AuthController } from './auth.controller';
 
 const router = express.Router();
 
+// user registering route
 router.post(
   '/register',
   validateRequest(AuthValidation.registerUserValidationSchema),
   AuthController.registerUserController,
 );
 
+// user login route
 router.post(
   '/login',
   validateRequest(AuthValidation.loginValidationSchema),
